@@ -1,14 +1,17 @@
 <template>
+  <div>
+    <header-component />
     <h1>Bienvenue !!</h1>
+  </div>
 </template>
   
-  <script>
-  export default {
-    name: 'WelcomePage',
-    props: {
-      
-    }
+<script>
+import HeaderComponent from "../components/Header.vue";
+
+export default {
+  name: 'WelcomePage',
+  components: {
+    HeaderComponent
   }
-  </script>
-  
-  
+}
+</script>

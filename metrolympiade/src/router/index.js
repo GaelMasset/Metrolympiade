@@ -14,8 +14,7 @@ const routes = [
   { path: '/leaderboard', component: LeaderboardPage },
   { path: '/login', component: LoginPage },
   { path: '/register', component: RegisterPage },
-  { path: '/team', component: TeamPage },
-
+  { path: '/team', component: TeamPage }
 ];
 
 const router = createRouter({
