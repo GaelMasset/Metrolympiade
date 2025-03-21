@@ -1,19 +1,19 @@
 <template>
     <div class="content boldonse">
         <div class="headerChild">
-            <h1 class="link">Metrolympiade</h1>
+            <router-link to="/" class="link large">Metrolympiade</router-link>
         </div>
         <div class="headerChild">
-            <h2 class="link">Classement général</h2>
+            <router-link to="/leaderboard" class="link medium">Classement général</router-link>
         </div>
         <div class="headerChild">
-            <h2 class="link">Mon équipe</h2>
+          <router-link to="/team" class="link medium">Mon équipe</router-link>
         </div>
         <div class="headerChild">
-            <h2 class="link">Mes matchs</h2>
+          <router-link to="/games" class="link medium">Mes matchs</router-link>
         </div>
         <div class="headerChild">
-            <h3 class="link">Profil</h3>
+          <router-link to="/profil" class="link small">Profil</router-link>
         </div>
     </div>
 </template>
@@ -40,7 +40,7 @@
     background-color: rgb(255, 255, 255, 1);
 
     min-height: var(--header-size);
-    width: 100vw;
+    width: calc(100vw-40px);
 
     padding: 0px 20px;
 
@@ -49,7 +49,6 @@
 
     align-items: center;
 
-    position: fixed;
 }
 
 .link {
@@ -79,16 +78,16 @@
   transform-origin: bottom left;
 }
 
-h1{
+.large{
+    font-size: 2rem;
+    display: inline-block;
+}
+.medium{
     font-size: 1.5rem;
     display: inline-block;
 }
-h2{
-    font-size: 1rem;
-    display: inline-block;
-}
-h3{
-    font-size: 0.7rem;
+.small{
+    font-size: 1.2rem;
     display: inline-block;
 }
 
@@ -105,6 +104,47 @@ h3{
     margin-left: 10%;
 }
 
+@media(max-width: 1000px){
+  .large{
+    font-size: 1.5rem;
+  }
+  .medium{
+      font-size: 1rem;
+  }
+  .small{
+      font-size: 0.7rem;
+  }
+}
+
+@media(max-width:750px){
+  .content{
+    flex-direction: column;
+  }
+  .large{
+    font-size: 1.5rem;
+  }
+  .medium{
+      font-size: 1.5rem;
+  }
+  .small{
+      font-size: 1.5rem;
+  }
+  .content > .headerChild:first-child{
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+  }
+  .content > .headerChild:last-child{
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+  }
+  .content > .headerChild{
+      flex-grow: 1;
+      text-align: left;
+      width: 100%;
+  }
+}
 </style>
   
   
