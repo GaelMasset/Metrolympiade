@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-component />
-    <h1>La page Leaderboarrd</h1>
+    <h1>Classement général</h1>
   </div>
 </template>
   
