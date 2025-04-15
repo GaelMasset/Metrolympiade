@@ -9,7 +9,7 @@ export default function useLeaderboard() {
     isLoading.value = true
     try {
       const response = await fetch('http://localhost:3000/ranking')
-      if (!response.ok) throw new Error('Erreur de chargement')
+      if (!response.ok) throw new Error('Erreurs de chargement')
       leaderboard.value = await response.json()
     } catch (err) {
       error.value = err.message
