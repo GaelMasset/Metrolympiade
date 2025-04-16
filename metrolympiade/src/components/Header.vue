@@ -13,7 +13,7 @@
           <router-link to="/games" class="link medium">Mes matchs</router-link>
         </div>
         <div class="headerChild">
-          <router-link to="/profil" class="link small">Profil</router-link>
+          <router-link to="/profile" class="link small">Profil</router-link>
         </div>
     </div>
 </template>
