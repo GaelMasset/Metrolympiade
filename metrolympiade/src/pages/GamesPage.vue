@@ -7,7 +7,12 @@
     <div v-else-if="error">Erreur : {{ error }}</div>
   </div>
 
-  <p v-for="(matchs) in matches" v-bind:key="matchs.match">{{ matchs.team1Score }}</p>
+  <tr v-for="(matchs, index) in matches" v-bind:key="matchs.match">
+    <td>{{ matchs.team1Score }}</td>
+    <td>{{ index+1 }}</td>
+    <!--<td>{{ MatchCard(matchs) }}</td>-->
+  </tr>
+
 </template>
   
   <script>

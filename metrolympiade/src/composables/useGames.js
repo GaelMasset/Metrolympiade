@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
 
-export function useMatches() {
+export default function useMatches() {
 
     const matches = ref([])
     const isLoading = ref(true)
@@ -9,7 +9,7 @@ export function useMatches() {
     const fetchMatches = async () => {
         isLoading.value = true;
         try{
-        const response = fetch("http://localhost:3000/matches/me");
+        const response = await fetch("http://localhost:3000/matches/me");
         if (!response.ok) throw new Error('Erreur de chargement')
         response
         .then((response) => response.json())
