@@ -22,7 +22,10 @@
   export default {
     name: 'header-component',
     props: {
-      
+      nom: {
+        type: String,
+        required: true
+      }
     }
   }
   </script>
