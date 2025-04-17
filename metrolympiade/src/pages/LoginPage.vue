@@ -61,6 +61,7 @@
 
 <template>
   <div>
+    <header-component/>
     <div v-if="isLoading" class="card boldonse">
       <div class="item">
         <p> Chargement... </p>
@@ -102,6 +103,7 @@
 </template>
   
   <script>
+  import HeaderComponent from "../components/Header.vue";
 
   export default {
     name: 'LoginPage',
@@ -109,7 +111,7 @@
       
     },
     components: {
-
+      HeaderComponent
     }
   }
   </script>
