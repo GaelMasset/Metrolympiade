@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-component />
-    <div v-if="isLoading" class="card boldonse">
+    <div v-if="isLoadingTeams && isLoadingActivities"  class="card boldonse">
       <div class="item">
         <p> Chargement... </p>
       </div>
@@ -19,7 +19,7 @@
 
           <label for="liste-activites">Activités</label>
           <select name="liste-activites" id="liste-activites">
-            <option value="test">Test</option>
+            <option v-for="activity in activities" :key="activity.id">{{ activity.name }}</option>
           </select>
           <br><br>
 
@@ -46,6 +46,7 @@
 <script>
 import HeaderComponent from "../components/Header.vue";
 import getTeams from "../composables/getTeams.js";
+import getActivities from "../composables/getActivities.js";
 
 export default {
   name: 'GamePage',
@@ -56,8 +57,17 @@ export default {
     HeaderComponent
   },
   setup() {
-    const { teams, isLoading, error } = getTeams();
-    return { teams, isLoading, error };
+    const { teams, isLoadingTeams, errorTeams } = getTeams();
+    const { activities, isLoadingActivities, errorActivities } = getActivities();
+  
+    return {
+      teams,
+      activities,
+      isLoadingTeams,
+      isLoadingActivities,
+      errorTeams,
+      errorActivities
+    };
   }
 }
 </script>
