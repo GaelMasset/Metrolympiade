@@ -1,35 +1,43 @@
 <template>
   <div>
     <header-component />
-    <div class="card">
-      <h1>Nouveau match </h1>
-      <form>
-        <label for="liste-adversaires">Adversaires</label>
-        <select name="liste-adversaires" id="liste-adversaires">
-          <option value="test">Test</option>
-        </select>
-        <br><br>
+    <div v-if="isLoading" class="card boldonse">
+      <div class="item">
+        <p> Chargement... </p>
+      </div>
+    </div>
 
-        <label for="liste-activites">Activités</label>
-        <select name="liste-activites" id="liste-activites">
-          <option value="test">Test</option>
-        </select>
-        <br><br>
+    <div v-else>
+      <div class="card">
+        <h1>Nouveau match </h1>
+        <form>
+          <label for="liste-adversaires">Adversaires</label>
+          <select name="liste-adversaires" id="liste-adversaires">
+            <option v-for="team in teams" :key="team.id" >{{ team.name }}</option>
+          </select>
+          <br><br>
 
-        <label for="heure-de-debut">Heure de début</label>
-        <input type="time" name="heure-de-debut" id="heure-de-debut">
-        <br><br>
+          <label for="liste-activites">Activités</label>
+          <select name="liste-activites" id="liste-activites">
+            <option value="test">Test</option>
+          </select>
+          <br><br>
 
-        <p>Scores finaux</p>
-        <label for="score-team">teamName</label>
-        <input type="number" name="score-team" id="score-team">
-        <br>
-        <label for="score-adversaire">Adversaire</label>
-        <input type="number" name="score-adversaire" id="score-adversaire">
-        <br><br>
+          <label for="heure-de-debut">Heure de début</label>
+          <input type="time" name="heure-de-debut" id="heure-de-debut">
+          <br><br>
 
-        <input type="submit" value="Enregistrer">
-      </form>
+          <p>Scores finaux</p>
+          <label for="score-team">{{ teamName }}</label>
+          <input type="number" name="score-team" id="score-team">
+          <br>
+          <label for="score-adversaire">Adversaire</label>
+          <input type="number" name="score-adversaire" id="score-adversaire">
+          <br><br>
+
+          <input type="submit" value="Enregistrer">
+        </form>
+      </div>
     </div>
     
   </div>
@@ -37,6 +45,7 @@
   
 <script>
 import HeaderComponent from "../components/Header.vue";
+import getTeams from "../composables/getTeams.js";
 
 export default {
   name: 'GamePage',
@@ -45,6 +54,10 @@ export default {
   },
   components: {
     HeaderComponent
+  },
+  setup() {
+    const { teams, isLoading, error } = getTeams();
+    return { teams, isLoading, error };
   }
 }
 </script>
