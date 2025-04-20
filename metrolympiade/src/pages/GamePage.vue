@@ -17,6 +17,8 @@ const form = ref({
   team2Score: 0
 })
 
+const teamName = getUser().team.name;
+
 const handleSubmit = async () => {
   const jwtToken = getUser().token;
 
@@ -76,30 +78,30 @@ const handleSubmit = async () => {
         <h1>Nouveau match </h1>
         <form @submit.prevent="handleSubmit">
           <label for="liste-adversaires">Adversaires</label>
-          <select name="liste-adversaires" id="liste-adversaires" v-model="form.team2Id">
+          <select name="liste-adversaires" id="liste-adversaires" v-model="form.team2Id" class="formItem">
             <option v-for="team in teams" :key="team.id" :value="team.id" >{{ team.name }}</option>
           </select>
-          <br><br>
+          <br>
 
           <label for="liste-activites">Activités</label>
-          <select name="liste-activites" id="liste-activites" v-model="form.activityId">
+          <select name="liste-activites" id="liste-activites" v-model="form.activityId" class="formItem">
             <option v-for="activity in activities" :key="activity.id" :value="activity.id">{{ activity.name }}</option>
           </select>
-          <br><br>
+          <br>
 
           <label for="heure-de-debut">Heure de début</label>
-          <input type="time" name="heure-de-debut" id="heure-de-debut" v-model="form.startedAtTime">
-          <br><br>
+          <input type="time" name="heure-de-debut" id="heure-de-debut" v-model="form.startedAtTime" class="formItem">
+          <br>
 
           <p>Scores finaux</p>
           <label for="score-team">{{ teamName }}</label>
-          <input type="number" name="score-team" id="score-team" v-model.number="form.team1Score">
+          <input type="number" name="score-team" id="score-team" v-model.number="form.team1Score" class="formItem">
           <br>
           <label for="score-adversaire">Adversaire</label>
-          <input type="number" name="score-adversaire" id="score-adversaire" v-model.number="form.team2Score">
-          <br><br>
+          <input type="number" name="score-adversaire" id="score-adversaire" v-model.number="form.team2Score" class="formItem">
+          <br>
 
-          <input type="submit" value="Enregistrer">
+          <input type="submit" value="Enregistrer" class="formItem">
         </form>
       </div>
     </div>
@@ -122,6 +124,45 @@ const handleSubmit = async () => {
   align-items: center;
   justify-content: center;
   border-radius: 5em;
+}
+
+.item {
+  width: 20em;
+  text-align: center;
+}
+
+.formItem {
+  width: 15em;
+  margin: 1em;
+  border-radius: 0.5em;
+}
+
+.errorCard {
+  width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5em;
+  background-color:tomato;
+  color: darkred;
+}
+
+.successCard {
+  width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5em;
+  background-color:darkgreen;
+  color: greenyellow;
 }
 
 </style>
