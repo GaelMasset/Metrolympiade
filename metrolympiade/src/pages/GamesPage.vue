@@ -11,7 +11,7 @@
     <div v-for="(match) in matches" v-bind:key="match.match" >
 
       <div class="card boldonse" v-if="match.team1Score > match.team2Score">
-        
+        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
         <strong>
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
@@ -23,6 +23,7 @@
       </div>
 
       <div class="card boldonse" v-else-if="match.team1Score < match.team2Score">
+        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
         <p>
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
@@ -34,6 +35,7 @@
       </div>
 
       <div class="card boldonse" v-else>
+        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
         <p>
           <span>{{ match.team1 }}</span> 
           <span>{{ match.team1Score }}</span>
