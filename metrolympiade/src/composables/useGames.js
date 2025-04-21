@@ -1,4 +1,5 @@
 import { ref, onMounted } from 'vue'
+import getUser from '../composables/getUser.js'
 
 export default function useMatches() {
 
@@ -9,14 +10,19 @@ export default function useMatches() {
     const fetchMatches = async () => {
         isLoading.value = true;
         try{
-        const response = await fetch("http://localhost:3000/matches/me");
-        if (!response.ok) throw new Error('Erreur de chargement')
-        response
-        .then((response) => response.json())
-        .then((data) => {
-            matches.value = data;
-            isLoading.value = false;
-        });
+            const token = JSON.parse(getUser()).token;
+            await fetch("http://localhost:3000/matches/me"),{
+                method:"GET",
+                headers:{
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+            .then((response) => response.json())
+            .then((data) => {
+                matches.value = data;
+                isLoading.value = false;
+            });
         }catch(err){
             error.value = err.message
         }finally{
