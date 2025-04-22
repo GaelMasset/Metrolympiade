@@ -2,8 +2,9 @@
   <div class="myGames-page" >
     <header-component />
     <h1>Mes matches</h1>
-
-    <router-link to="/game"><button class="boldonse">Ajouter un match</button></router-link>
+    <div class="button-div">
+      <router-link to="/game"><button class="boldonse">Ajouter un match</button></router-link>
+    </div>
 
     <div v-if="isLoading">Chargement...</div>
     <div v-else-if="error">Erreur : {{ error }}</div>
@@ -96,6 +97,12 @@ strong{
   display: flex;
   justify-content: space-between; 
   margin: 0;
+}
+
+.button-div{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10%;
 }
 </style>  
   
