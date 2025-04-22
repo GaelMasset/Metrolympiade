@@ -1,7 +1,7 @@
 <template>
   <div class="myGames-page" >
     <header-component />
-    <h1>Mes matches</h1>
+    <h1 class="titlePage">Mes matches</h1>
     <div class="button-div">
       <router-link to="/game"><button class="boldonse">Ajouter un match</button></router-link>
     </div>
@@ -103,6 +103,20 @@ strong{
   display: flex;
   justify-content: flex-end;
   margin-right: 10%;
+  margin-top: 5%;
+}
+
+button{
+  background-color: blueviolet;
+  color: white;
+}
+
+.titlePage{
+  color:white;
+  text-align: center;
+  background-color: rgb(90, 6, 90);
+  padding-right: 5rem;
+  margin-top: 2%;
 }
 </style>  
   
