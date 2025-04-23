@@ -1,11 +1,10 @@
 <template>
   <div class="myGames-page" >
     <header-component />
-    <h1 class="titlePage">Mes matches</h1>
+    <h1 class="titlePage">Mes matchs</h1>
     <div class="button-div">
       <router-link to="/game"><button class="boldonse">Ajouter un match</button></router-link>
     </div>
-
     <div v-if="isLoading">Chargement...</div>
     <div v-else-if="error">Erreur : {{ error }}</div>
 
