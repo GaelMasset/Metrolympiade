@@ -1,17 +1,87 @@
 <template>
-  <div>
+  <div class="boldonse">
     <header-component />
-    <h1>Bienvenue !!</h1>
+    <h1>Bienvenue</h1>
+    
+    <div class="podium">
+      <h2>Podium</h2>
+      <div v-if="isLoading">
+        <p>Chargement ...</p>
+      </div>
+      <div v-else>
+        <ol>
+          <li class="first">
+            {{ leaderboard[0].team }}
+          </li>
+          <li class="second">
+            {{ leaderboard[1].team }}
+          </li>
+          <li class="third">
+            {{ leaderboard[2].team }}
+          </li>
+        </ol>
+        <router-link to="/leaderboard">Reste du classement</router-link>
+      </div>
+    </div>
   </div>
 </template>
   
 <script>
 import HeaderComponent from "../components/Header.vue";
+import useLeaderboard from "../composables/useLeaderboard.js";
 
 export default {
   name: 'WelcomePage',
   components: {
     HeaderComponent
+  },
+  setup() {
+    const { leaderboard, isLoading, error } = useLeaderboard()
+    return { leaderboard, isLoading, error }
   }
 }
 </script>
+
+<style>
+
+h1 {
+  animation: appear 2s;
+  text-shadow: rgb(90, 6, 90) 1px 0 5px;
+  color: white;
+  font-size: 5vw;
+  text-align: center;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.podium {
+  background-color: rgb(255 255 255 / 80%);
+  border-radius: 0.5em;
+  margin-left: 1vw;
+  width: fit-content;
+  padding: 2em;
+}
+
+.first {
+  color: gold;
+  font-size: xxx-large;
+}
+
+.second {
+  color: silver;
+  font-size: xx-large;
+}
+
+.third {
+  color:orangered;
+  font-size: x-large;
+}
+
+</style>
