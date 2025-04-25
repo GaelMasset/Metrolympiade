@@ -91,9 +91,16 @@
 
 .card {
   width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vw;
+  background-color: white;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 5em;
-  height: 15em;
+  min-height: 15em;
 }
 
 .normalText{
