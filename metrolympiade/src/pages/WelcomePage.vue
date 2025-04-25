@@ -1,7 +1,7 @@
 <template>
   <div class="boldonse">
     <header-component />
-    <h1>Bienvenue</h1>
+    <h1 class="welcome">Bienvenue</h1>
     
     <div class="podium">
       <h2>Podium</h2>
@@ -44,7 +44,7 @@ export default {
 
 <style>
 
-h1 {
+.welcome {
   animation: appear 2s;
   text-shadow: rgb(90, 6, 90) 1px 0 5px;
   color: white;
