@@ -35,7 +35,10 @@
       </div>
 
       <div class="card boldonse" v-else>
-        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <p>
+          <span>{{ match.activity }}</span> 
+          <span>{{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</span>
+        </p>
         <div class="normalText">
           <span>{{ match.team1 }}</span> 
           <span>{{ match.team1Score }}</span>
