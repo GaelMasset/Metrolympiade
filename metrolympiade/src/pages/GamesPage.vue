@@ -72,11 +72,11 @@
     methods:{
       fetchHours(dateString){
         const stringToDate= new Date(dateString)
-        return stringToDate.getHours()
+        return stringToDate.getUTCHours()
       },
       fetchMinutes(dateString){
         const stringToDate = new Date(dateString)
-        return stringToDate.getMinutes()
+        return stringToDate.getUTCMinutes()
       }
     }
   }
