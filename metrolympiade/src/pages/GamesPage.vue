@@ -11,7 +11,7 @@
     <div v-for="(match) in matches" v-bind:key="match.match" >
 
       <div class="card boldonse"  v-if="match.team1Score > match.team2Score">
-        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <small>{{ match.activity }}   à  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</small>
         <strong>
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="card boldonse" v-else-if="match.team1Score < match.team2Score">
-        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <small>{{ match.activity }}  à   {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</small>
         <div class="normalText">
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
@@ -35,10 +35,7 @@
       </div>
 
       <div class="card boldonse" v-else>
-        <p>
-          <span>{{ match.activity }}</span> 
-          <span>{{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</span>
-        </p>
+        <small>{{ match.activity }}   à  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</small>
         <div class="normalText">
           <span>{{ match.team1 }}</span> 
           <span>{{ match.team1Score }}</span>
@@ -119,7 +116,7 @@ strong{
   margin: 4%;
 }
 
-p{
+small{
   display: flex;
   align-self: flex-start;
   margin: 4%;
