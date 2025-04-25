@@ -9,7 +9,7 @@ import TeamPage from '@/pages/TeamPage.vue';
 import ProfilePage from '@/pages/ProfilePage.vue';
 
 const routes = [
-  { path: '/', component: WelcomePage, meta: {requiresAuth: true} },
+  { path: '/', component: WelcomePage },
   { path: '/game', component: GamePage,  meta: {requiresAuth: true} },
   { path: '/games', component: GamesPage,  meta: {requiresAuth: true} },
   { path: '/leaderboard', component: LeaderboardPage },
