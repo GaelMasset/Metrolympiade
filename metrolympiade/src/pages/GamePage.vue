@@ -28,17 +28,19 @@ const isError = computed( () => {
 })
 
 const handleSubmit = async () => {
+
   const jwtToken = getUser().token;
   let startedAt;
 
   isCreated.value = false;
+  errorNewMatch.value = new Error("");
 
   try {
     const today = new Date().toISOString().split('T')[0];
     startedAt = new Date(`${today}T${form.value.startedAtTime}:00Z`).toISOString();
   } catch(error) {
     console.error('Erreur:', error);
-    errorNewMatch.value = error;
+    errorNewMatch.value = new Error("Heure invalide");
     return;
   }
 
@@ -70,7 +72,15 @@ const handleSubmit = async () => {
 
   } catch (error) {
     console.error('Erreur:', error);
-    errorNewMatch.value = error;
+    if(error.message.includes('foreign key')){
+      errorNewMatch.value = new Error("Aucun advesaire ou aucune activité");
+    } else if(error.message.includes('already exists')){
+      errorNewMatch.value = new Error("Ces équipes ce sont déjà affrontés");
+    } else {
+      errorNewMatch.value = error;
+    }
+    
+    
   }
 }
 
