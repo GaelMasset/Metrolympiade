@@ -25,8 +25,19 @@
         </div>
       </div>
 
-      <div class="info">
-          <h2>Dernier Match</h2>
+      <div v-if="user" class="info">
+          <h2>Gestion</h2>
+          <ul>
+            <li>
+              <router-link to="/teams">Mon équipe</router-link>
+            </li>
+            <li>
+              <router-link to="/games">Mes matchs</router-link>
+            </li>
+            <li>
+              <router-link to="/profile">Mon profil</router-link>
+            </li>
+          </ul>      
       </div>
     </div>
   </div>
@@ -35,6 +46,7 @@
 <script>
 import HeaderComponent from "../components/Header.vue";
 import useLeaderboard from "../composables/useLeaderboard.js";
+import getUser from "../composables/getUser.js";
 
 export default {
   name: 'WelcomePage',
@@ -43,7 +55,8 @@ export default {
   },
   setup() {
     const { leaderboard, isLoading, error } = useLeaderboard()
-    return { leaderboard, isLoading, error }
+    const user = getUser(); 
+    return { user, leaderboard, isLoading, error}
   }
 }
 </script>
@@ -70,6 +83,7 @@ export default {
 .infos {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
 }
 
