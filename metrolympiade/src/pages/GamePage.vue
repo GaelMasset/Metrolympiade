@@ -1,6 +1,6 @@
 <script setup>
 
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import HeaderComponent from "../components/Header.vue";
 import getTeams from "../composables/getTeams.js";
 import getActivities from "../composables/getActivities.js";
@@ -19,11 +19,30 @@ const form = ref({
 
 const teamName = getUser().team.name;
 
-const handleSubmit = async () => {
-  const jwtToken = getUser().token;
+const errorNewMatch = ref(new Error(""));
 
-  const today = new Date().toISOString().split('T')[0];
-  const startedAt = new Date(`${today}T${form.value.startedAtTime}:00Z`).toISOString();
+const isCreated = ref(false);
+
+const isError = computed( () => {
+  return errorNewMatch.value.message.length > 0;
+})
+
+const handleSubmit = async () => {
+
+  const jwtToken = getUser().token;
+  let startedAt;
+
+  isCreated.value = false;
+  errorNewMatch.value = new Error("");
+
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    startedAt = new Date(`${today}T${form.value.startedAtTime}:00Z`).toISOString();
+  } catch(error) {
+    console.error('Erreur:', error);
+    errorNewMatch.value = new Error("Heure invalide");
+    return;
+  }
 
   const body = {
     team2Id: form.value.team2Id,
@@ -45,7 +64,7 @@ const handleSubmit = async () => {
 
     const data = await res.json();
     if (res.ok) {
-      alert('Match créé avec succès');
+      isCreated.value = true;
       console.log(data);
     } else {
       throw new Error(data.message || 'Erreur lors de la création');
@@ -53,7 +72,15 @@ const handleSubmit = async () => {
 
   } catch (error) {
     console.error('Erreur:', error);
-    alert(error.message);
+    if(error.message.includes('foreign key')){
+      errorNewMatch.value = new Error("Aucun advesaire ou aucune activité");
+    } else if(error.message.includes('already exists')){
+      errorNewMatch.value = new Error("Ces équipes ce sont déjà affrontés");
+    } else {
+      errorNewMatch.value = error;
+    }
+    
+    
   }
 }
 
@@ -74,7 +101,7 @@ const handleSubmit = async () => {
     </div>
 
     <div v-else>
-      <div class="card">
+      <div class="card boldonse">
         <h1>Nouveau match </h1>
         <form @submit.prevent="handleSubmit">
           <label for="liste-adversaires">Adversaires</label>
@@ -105,6 +132,17 @@ const handleSubmit = async () => {
         </form>
       </div>
     </div>
+
+    <div class="errorCard boldonse" v-if="isError">
+        <div class="item">
+          <p>Impossible de créer le match : {{ errorNewMatch.message }}</p>
+        </div>
+    </div>
+    <div v-else-if="isCreated" class="successCard boldonse">
+      <div class="item">
+        <p>Match créé avec succès</p>
+      </div>
+    </div>
     
   </div>
 </template>
@@ -112,6 +150,34 @@ const handleSubmit = async () => {
 
 
 <style>
+
+.errorCard {
+  width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5em;
+  background-color:tomato;
+  color: darkred;
+}
+
+.successCard {
+  width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5em;
+  background-color:darkgreen;
+  color: greenyellow;
+}
 
 .card {
   width: 30em;
