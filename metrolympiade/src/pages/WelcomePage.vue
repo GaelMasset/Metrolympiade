@@ -29,7 +29,7 @@
           <h2>Gestion</h2>
           <ul>
             <li>
-              <router-link to="/teams">Mon équipe</router-link>
+              <router-link to="/team">Mon équipe</router-link>
             </li>
             <li>
               <router-link to="/games">Mes matchs</router-link>
