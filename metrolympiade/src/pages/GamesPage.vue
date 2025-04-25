@@ -12,10 +12,10 @@
 
       <div class="card boldonse"  v-if="match.team1Score > match.team2Score">
         <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
-        <div class="boldText">
+        <strong>
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
-        </div>
+        </strong>
         <div class="normalText">
           <span>{{ match.team2 }}</span> 
           <span>{{ match.team2Score }}</span>
@@ -28,10 +28,10 @@
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
         </div>
-        <div class="boldText">
+        <strong>
           <span>{{ match.team2 }}</span> 
           <span>{{ match.team2Score }}</span>
-        </div>
+        </strong>
       </div>
 
       <div class="card boldonse" v-else>
@@ -85,24 +85,34 @@
   </script>
 
 <style>
+
 .card {
   width: 30em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5vw;
-  background-color: white;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border-radius: 5em;
+  height: 15em;
+}
+
+.normalText{
+  display: flex;
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 80%;
+  margin: 4%;
+}
+
+strong{
+  display: flex;
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 80%;
+  margin: 4%;
 }
 
 p{
   display: flex;
   align-self: flex-start;
-  padding: 1rem;
-  margin-left: 4%;
+  margin: 4%;
 }
 
 .button-div{
@@ -115,6 +125,8 @@ p{
 button{
   background-color: blueviolet;
   color: white;
+  width: auto;
+  height: 5em;
 }
 
 .titlePage{
@@ -127,10 +139,6 @@ button{
 
 .myGames-page{
   padding: 2rem;
-}
-
-.card {
-  display: flex;
 }
 
 </style>  
