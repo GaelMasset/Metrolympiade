@@ -3,24 +3,30 @@
     <header-component />
     <h1 class="welcome">Bienvenue</h1>
     
-    <div class="podium">
-      <h2>Podium</h2>
-      <div v-if="isLoading">
-        <p>Chargement ...</p>
+    <div class="infos">
+      <div class="info">
+        <h2>Podium</h2>
+        <div v-if="isLoading">
+          <p>Chargement ...</p>
+        </div>
+        <div v-else>
+          <ol>
+            <li class="first">
+              {{ leaderboard[0].team }}
+            </li>
+            <li class="second">
+              {{ leaderboard[1].team }}
+            </li>
+            <li class="third">
+              {{ leaderboard[2].team }}
+            </li>
+          </ol>
+          <router-link to="/leaderboard">Reste du classement</router-link>
+        </div>
       </div>
-      <div v-else>
-        <ol>
-          <li class="first">
-            {{ leaderboard[0].team }}
-          </li>
-          <li class="second">
-            {{ leaderboard[1].team }}
-          </li>
-          <li class="third">
-            {{ leaderboard[2].team }}
-          </li>
-        </ol>
-        <router-link to="/leaderboard">Reste du classement</router-link>
+
+      <div class="info">
+          <h2>Dernier Match</h2>
       </div>
     </div>
   </div>
@@ -61,10 +67,16 @@ export default {
   }
 }
 
-.podium {
+.infos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.info {
   background-color: rgb(255 255 255 / 80%);
   border-radius: 0.5em;
-  margin-left: 1vw;
+  margin: 1vw;
   width: fit-content;
   padding: 2em;
 }
