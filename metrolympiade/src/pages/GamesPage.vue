@@ -1,6 +1,6 @@
 <template>
-  <div class="myGames-page" >
-    <header-component />
+  <header-component />
+  <div class="myGames-page boldonse">
     <h1 class="titlePage">Mes matchs</h1>
     <div class="button-div">
       <router-link to="/game"><button class="boldonse">Ajouter un match</button></router-link>
@@ -10,40 +10,40 @@
 
     <div v-for="(match) in matches" v-bind:key="match.match" >
 
-      <div class="card boldonse" v-if="match.team1Score > match.team2Score">
-        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
-        <strong>
+      <div class="card boldonse"  v-if="match.team1Score > match.team2Score">
+        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <div class="boldText">
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
-        </strong>
-        <p>
+        </div>
+        <div class="normalText">
           <span>{{ match.team2 }}</span> 
           <span>{{ match.team2Score }}</span>
-        </p>
+        </div>
       </div>
 
       <div class="card boldonse" v-else-if="match.team1Score < match.team2Score">
-        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
-        <p>
+        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <div class="normalText">
           <span>{{ match.team1 }}</span>
           <span>{{ match.team1Score }}</span>
-        </p>
-        <strong>
+        </div>
+        <div class="boldText">
           <span>{{ match.team2 }}</span> 
           <span>{{ match.team2Score }}</span>
-        </strong>
+        </div>
       </div>
 
       <div class="card boldonse" v-else>
-        <p>{{ match.activity }} ' ' {{ getHourFromDate(match.startedAt) }}</p>
-        <p>
+        <p>{{ match.activity }}  {{ fetchHours(match.startedAt) }}:{{ fetchMinutes(match.startedAt) }}</p>
+        <div class="normalText">
           <span>{{ match.team1 }}</span> 
           <span>{{ match.team1Score }}</span>
-        </p>
-        <p>
+        </div>
+        <div class="normalText">
           <span>{{ match.team2 }}</span> 
           <span>{{ match.team2Score }}</span>
-        </p>
+        </div>
       </div>
 
     </div>
@@ -56,7 +56,7 @@
   <script>
   import HeaderComponent from "../components/Header.vue";
   import useMatches from "../composables/useGames.js"
-  
+
   export default {
     name: 'GamesPage',
     props: {
@@ -68,6 +68,16 @@
     setup() {
       const { matches, isLoading, error } = useMatches()
       return { matches, isLoading, error }
+    },
+    methods:{
+      fetchHours(dateString){
+        const stringToDate= new Date(dateString)
+        return stringToDate.getHours()
+      },
+      fetchMinutes(dateString){
+        const stringToDate = new Date(dateString)
+        return stringToDate.getMinutes()
+      }
     }
   }
 
@@ -87,15 +97,12 @@
   justify-content: center;
   border-radius: 5em;
 }
+
 p{
   display: flex;
-  justify-content: space-between; 
-  margin: 0;
-}
-strong{
-  display: flex;
-  justify-content: space-between; 
-  margin: 0;
+  align-self: flex-start;
+  padding: 1rem;
+  margin-left: 4%;
 }
 
 .button-div{
@@ -117,5 +124,14 @@ button{
   padding-right: 5rem;
   margin-top: 2%;
 }
+
+.myGames-page{
+  padding: 2rem;
+}
+
+.card {
+  display: flex;
+}
+
 </style>  
   
