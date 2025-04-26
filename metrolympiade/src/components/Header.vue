@@ -1,3 +1,10 @@
+<script setup>
+import getUser from "../composables/getUser.js";
+const user = getUser(); 
+
+
+</script>
+
 <template>
     <div class="content boldonse">
         <div class="headerChild">
@@ -6,14 +13,15 @@
         <div class="headerChild">
             <router-link to="/leaderboard" class="link medium">Classement général</router-link>
         </div>
-        <div class="headerChild">
+        <div v-if="user" class="headerChild">
           <router-link to="/team" class="link medium">Mon équipe</router-link>
         </div>
-        <div class="headerChild">
+        <div v-if="user" class="headerChild">
           <router-link to="/games" class="link medium">Mes matchs</router-link>
         </div>
         <div class="headerChild">
-          <router-link to="/profile" class="link small">Profil</router-link>
+          <router-link v-if="user" to="/profile" class="link small">Profil</router-link>
+          <router-link v-else to="/profile" class="link small">Se connecter</router-link>
         </div>
     </div>
 </template>
