@@ -148,7 +148,8 @@
 
 
 .myteam {
-  width: 100%;
+  
+  padding: 2rem;
   margin-top: 1rem;
   border-collapse: collapse;
   background-color: rgba(255, 255, 255, 0.9);
