@@ -53,7 +53,6 @@ export default {
   text-align: center;
   background-color: rgb(90, 6, 90);
   padding-right: 5rem;
-
 }
 
 
