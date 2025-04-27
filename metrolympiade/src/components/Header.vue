@@ -47,7 +47,7 @@ const user = getUser();
 .content{
     background-color: rgb(255, 255, 255, 1);
 
-    height: 80px;
+    height: auto;
     width: 100%;
 
     padding: 0px 20px;

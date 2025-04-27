@@ -87,6 +87,12 @@ export default {
   align-items: center;
 }
 
+@media (max-width: 800px){
+  .infos{
+    flex-direction: column;
+  }
+}
+
 .info {
   background-color: rgb(255 255 255 / 80%);
   border-radius: 0.5em;
