@@ -9,6 +9,9 @@
         <div v-if="isLoading">
           <p>Chargement ...</p>
         </div>
+        <div v-else-if="error">
+          <p>Podium inaccessible ...</p>
+        </div>
         <div v-else>
           <ol>
             <li class="first">
