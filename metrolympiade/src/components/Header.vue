@@ -39,8 +39,8 @@
 .content{
     background-color: rgb(255, 255, 255, 1);
 
-    min-height: var(--header-size);
-    width: calc(100vw-40px);
+    height: 100vh;
+    width: 100%;
 
     padding: 0px 20px;
 
