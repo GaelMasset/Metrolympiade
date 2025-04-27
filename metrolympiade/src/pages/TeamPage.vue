@@ -15,6 +15,7 @@
   .then(response => response.json())
   .then(data => {
     myteam.value = data
+    if(data.members == null) data.members = [];
     isLoading.value = false;
     setTimeout(() => {
       document.getElementById("teamName").value = myteam.value.name;
