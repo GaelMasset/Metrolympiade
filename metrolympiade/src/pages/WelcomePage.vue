@@ -28,14 +28,33 @@
         </div>
       </div>
 
+      <div class="info">
+        <h2>Dernier match</h2>
+        <div v-if="isLoadingMatches">
+          <p>Chargement ...</p>
+        </div>
+        <div v-else-if="errorMatches">
+          <p>Match inaccessible ...</p>
+        </div>
+        <div v-else>
+          <h3>{{ matches[0]?.activity }}  à  {{ fetchHours(matches[0]?.startedAt) }}:{{ fetchMinutes(matches[0]?.startedAt) }}</h3>
+          <div>
+            <span>{{ matches[0]?.team1 }} : </span> 
+            <span>{{ matches[0]?.team1Score }}</span>
+          </div>
+          <div>
+            <span>{{ matches[0]?.team2 }} : </span> 
+            <span>{{ matches[0]?.team2Score }}</span>
+          </div>
+        </div>
+        <router-link to="/games">Reste des matchs</router-link>
+      </div>
+
       <div v-if="user" class="info">
           <h2>Gestion</h2>
           <ul>
             <li>
               <router-link to="/team">Mon équipe</router-link>
-            </li>
-            <li>
-              <router-link to="/games">Mes matchs</router-link>
             </li>
             <li>
               <router-link to="/profile">Mon profil</router-link>
@@ -49,6 +68,7 @@
 <script>
 import HeaderComponent from "../components/Header.vue";
 import useLeaderboard from "../composables/useLeaderboard.js";
+import useMatches from "../composables/useGames.js";
 import getUser from "../composables/getUser.js";
 
 export default {
@@ -57,14 +77,30 @@ export default {
     HeaderComponent
   },
   setup() {
-    const { leaderboard, isLoading, error } = useLeaderboard()
-    const user = getUser(); 
-    return { user, leaderboard, isLoading, error}
-  }
+    const { leaderboard, isLoading, error } = useLeaderboard();
+    const { matches, isLoadingMatches, errorMatches } = useMatches();
+    const user = getUser();
+    console.log(matches) 
+    return { user, leaderboard, isLoading, error, matches, isLoadingMatches, errorMatches}
+  },
+  methods:{
+      fetchHours(dateString){
+        const stringToDate= new Date(dateString)
+        return stringToDate.getUTCHours()
+      },
+      fetchMinutes(dateString){
+        const stringToDate = new Date(dateString)
+        return stringToDate.getUTCMinutes()
+      }
+    }
 }
 </script>
 
 <style>
+
+.right {
+  text-align: right;
+}
 
 .welcome {
   animation: appear 2s;
